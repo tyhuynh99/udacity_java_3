@@ -3,10 +3,18 @@ package com.udacity.jdnd.course3.critter.user;
 import java.time.DayOfWeek;
 import java.util.Set;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 /**
- * Represents the form that employee request and response data takes. Does not map
+ * Represents the form that employee request and response data takes. Does not
+ * map
  * to the database directly.
  */
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeDTO {
     private long id;
     private String name;
