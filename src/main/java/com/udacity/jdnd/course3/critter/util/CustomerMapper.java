@@ -1,8 +1,11 @@
 package com.udacity.jdnd.course3.critter.util;
 
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.udacity.jdnd.course3.critter.entity.Customer;
+import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.user.CustomerDTO;
 
 public class CustomerMapper {
@@ -23,7 +26,8 @@ public class CustomerMapper {
     }
 
     public static CustomerDTO customerToDTO(Customer entity) {
-        if (entity.getPets() == null) {
+        Set<Pet> petSet = entity.getPets();
+        if (petSet == null) {
             return CustomerDTO.builder()
                     .id(entity.getId())
                     .name(entity.getName())
@@ -36,7 +40,7 @@ public class CustomerMapper {
                 .name(entity.getName())
                 .phoneNumber(entity.getPhoneNumber())
                 .notes(entity.getNotes())
-                .petIds(entity.getPets().stream().map(x -> x.getId()).collect(Collectors.toList()))
+                .petIds(petSet.stream().map(x -> x.getId()).collect(Collectors.toList()))
                 .build();
     }
 }

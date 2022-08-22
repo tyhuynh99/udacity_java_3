@@ -21,7 +21,7 @@ public class PetMapper {
                 .birthDate(entity.getBirthDate())
                 .notes(entity.getNotes())
                 .type(entity.getType())
-                .ownerId(entity.getOwner().getId())
+                .ownerId(entity.getOwnerId())
                 .build();
     }
 }

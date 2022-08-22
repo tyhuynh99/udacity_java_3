@@ -36,7 +36,7 @@ public class Customer {
     @Column(name = "notes")
     private String notes;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "ownerId", fetch = FetchType.EAGER)
     private Set<Pet> pets;
 
 }

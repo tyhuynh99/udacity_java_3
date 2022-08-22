@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 public class Pet {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -44,9 +44,8 @@ public class Pet {
 
     @Enumerated(EnumType.STRING)
     private PetType type;
-
-    @ManyToOne
-    @JoinColumn(name = "onwerId")
-    private Customer owner;
+    
+    @JoinColumn(name = "customer_id")
+    private Long ownerId;
 
 }

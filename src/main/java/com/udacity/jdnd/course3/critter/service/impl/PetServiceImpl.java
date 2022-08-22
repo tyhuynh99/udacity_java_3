@@ -34,7 +34,7 @@ public class PetServiceImpl implements PetService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found");
         }
         Customer customer = customerOpt.get();
-        List<Pet> pet = repository.findAllByOwner(customer);
+        List<Pet> pet = repository.findAllByOwnerId(customer.getId());
         if (pet.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet not found");
         }
@@ -59,7 +59,7 @@ public class PetServiceImpl implements PetService {
         }
         Customer customer = customerOpt.get();
         Pet pet = PetMapper.PetDTOToEntity(dto);
-        pet.setOwner(customer);
+        pet.setOwnerId(customer.getId());
         Pet savedPet = repository.save(pet);
 
         return PetMapper.PetToDTO(savedPet);

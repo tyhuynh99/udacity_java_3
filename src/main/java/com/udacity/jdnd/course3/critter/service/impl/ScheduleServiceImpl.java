@@ -80,7 +80,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found");
         }
         Customer customer = customerOpt.get();
-        List<Pet> pets = petRepository.findAllByOwner(customer);
+        List<Pet> pets = petRepository.findAllByOwnerId(customer.getId());
         if (pets.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet not found");
         }
