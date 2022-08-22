@@ -5,6 +5,13 @@ import com.udacity.jdnd.course3.critter.user.EmployeeDTO;
 
 public class EmployeeMapper {
     public static Employee employeeDTOToEntity(EmployeeDTO dto) {
+        if (dto.getId() == null) {
+            return Employee.builder()
+                .name(dto.getName())
+                .skills(dto.getSkills())
+                .daysAvailable(dto.getDaysAvailable())
+                .build();
+        }
         return Employee.builder()
                 .id(dto.getId())
                 .name(dto.getName())

@@ -3,6 +3,7 @@ package com.udacity.jdnd.course3.critter.service.impl;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -31,15 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO create(CustomerDTO dto, List<Long> petIds) {
         Customer customer = CustomerMapper.customerDTOToEntity(dto);
-
-        List<Pet> pets = petRepository.findAllById(petIds);
-
-        if (pets.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pets not found");
-        }
-        customer.setPets(new HashSet<Pet>(pets));
         Customer savedCustomer = customerRepository.save(customer);
-
         return CustomerMapper.customerToDTO(savedCustomer);
     }
 
@@ -58,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet not found");
         }
         Pet pet = petOpt.get();
-        Customer customer = pet.getOwner();
+        Customer customer = customerRepository.findByPets(pet);
 
         return CustomerMapper.customerToDTO(customer);
     }

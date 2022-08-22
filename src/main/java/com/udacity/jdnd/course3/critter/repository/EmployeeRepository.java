@@ -1,7 +1,6 @@
 package com.udacity.jdnd.course3.critter.repository;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;

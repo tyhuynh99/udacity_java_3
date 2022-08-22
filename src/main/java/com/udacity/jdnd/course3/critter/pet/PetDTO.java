@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PetDTO {
-    private long id;
+    private Long id;
     private PetType type;
     private String name;
     private long ownerId;
@@ -61,11 +61,11 @@ public class PetDTO {
         this.notes = notes;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

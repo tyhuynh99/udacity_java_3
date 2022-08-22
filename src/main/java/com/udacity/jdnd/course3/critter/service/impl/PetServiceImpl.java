@@ -29,7 +29,12 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<PetDTO> findByCustomerId(Long customerId) {
-        List<Pet> pet = repository.findAllByCustomerId(customerId);
+        Optional<Customer> customerOpt = customerRepository.findById(customerId);
+        if (!customerOpt.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found");
+        }
+        Customer customer = customerOpt.get();
+        List<Pet> pet = repository.findAllByOwner(customer);
         if (pet.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet not found");
         }
@@ -50,7 +55,7 @@ public class PetServiceImpl implements PetService {
     public PetDTO save(PetDTO dto, Long customerId) {
         Optional<Customer> customerOpt = customerRepository.findById(customerId);
         if (!customerOpt.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found");
         }
         Customer customer = customerOpt.get();
         Pet pet = PetMapper.PetDTOToEntity(dto);
